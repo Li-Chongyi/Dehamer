@@ -15,7 +15,7 @@ Overview structure of our method. Our method consists of five key modules: a tra
 
    ```bash
    git clone <code_link>
-   cd dehamer-code/
+   cd Dehamer-main/
    ```
 
 2. Create Conda Environment and Install Dependencies
