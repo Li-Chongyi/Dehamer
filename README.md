@@ -29,7 +29,7 @@ Overview structure of our method. Our method consists of five key modules: a tra
 ## Prepare pretrained models and quick test
 Before performing the following steps, please download our pretrained model first.
 
- **Download Links:** [[Google Drive](DeHamer_Training_Testing_Data)] [[Baidu Disk](https://pan.baidu.com/s/1qXAErbilY_n_Fh9KB8UF7w?pwd=lsjw)]
+ **Download Links:** [[Google Drive](https://drive.google.com/drive/folders/1YZnKreDfqbs_GHB76Ko4qtifpPWPbCwU?usp=sharing)] [[Baidu Disk](https://pan.baidu.com/s/1qXAErbilY_n_Fh9KB8UF7w?pwd=lsjw)]
 
 Then, unzip the file and place the models to `ckpts/<dataset_name>` directory, separately.
 
