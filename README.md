@@ -4,6 +4,7 @@ This repository contains the official implementation of the following paper:
 > **Image Dehazing Transformer with Transmission-Aware 3D Position Embedding**<br>
 > Chun-Le Guo, Qixin Yan, Saeed Anwar, Runmin Cong, Wenqi Ren, Chongyi Li<sup>*</sup><br>
 > IEEE/CVF Conference on Computer Vision and Pattern Recognition (**CVPR**), 2022<br>
+paper link: https://openaccess.thecvf.com/content/CVPR2022/papers/Guo_Image_Dehazing_Transformer_With_Transmission-Aware_3D_Position_Embedding_CVPR_2022_paper.pdf
 
 ## Overview
 ![overall_structure](./figs/pipeline.jpg)
