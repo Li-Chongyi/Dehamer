@@ -219,7 +219,7 @@ CUDA_VISIBLE_DEVICES=1 python src/test_PSNR.py \
 ![quantitative_results](./figs/indoor_outdoor.jpg)
 ### Quantitative comparisons on real dehazing datasets: Dense-Haze and NH-HAZE.
 ![quantitative_results](./figs/dense_NH.jpg)
-The results of our dehamer on benchmarks can also be download from [<a href="https://drive.google.com/drive/folders/1i_tW1axmOjOy1InX1o3iS1nLnJ8TND7f?usp=sharing">Google drive</a>] and [<a href="[https://pan.baidu.com/s/1RGaVJ5kbd-cokE8ZAF_THw?pwd=801y](https://pan.baidu.com/s/15GypKcdsIr42BDFqPL5-Tg)">Baidu Disk (password: cx7h)</a>].
+The results of our dehamer on benchmarks can also be download from [<a href="https://drive.google.com/drive/folders/1i_tW1axmOjOy1InX1o3iS1nLnJ8TND7f?usp=sharing">Google drive</a>] and [<a href="[https://pan.baidu.com/s/15GypKcdsIr42BDFqPL5-Tg]">Baidu Disk (password: cx7h)</a>].
 
 
 ## Citation
