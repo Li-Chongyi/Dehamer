@@ -1,4 +1,4 @@
-# Image Dehazing Transformer with Transmission-Aware 3D Position Embedding(CVPR2022)
+# Image Dehazing Transformer with Transmission-Aware 3D Position Embedding (CVPR2022)
 
 This repository contains the official implementation of the following paper:
 > **Image Dehazing Transformer with Transmission-Aware 3D Position Embedding**<br>
