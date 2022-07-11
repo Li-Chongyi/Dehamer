@@ -648,22 +648,7 @@ class DarkChannel(nn.Module):
         x = dark_map.view(-1, 1, H, W)
         return x
 
-class dark_channel_depth(nn.Module):
-    def __init__(self):
-        super(dark_channel_depth, self).__init__()
-        self.DarkChannel = DarkChannel()
-        self.GF = FastGuidedFilter2d(30, 1e-4, 2)
-        self.A_from_DCP  =  A_from_BCP()
-        self.T_min_from_A  =  T_min_from_A()
-    def forward(self, x):
-        # x : (B, 3, H, W), in [-1, 1]
-        # x = (x + 1.0) / 2.0
-        DCP_map = DarkChannel(x)
-        A = A_from_BCP(x,DCP_map)
-        T_min = T_min_from_A(x,A)
-        T_GT =  (1- (1-DCP_map)/(1-A))
-        T_GT = GF(T_GT, x)
-        return x
+
 
 
 
