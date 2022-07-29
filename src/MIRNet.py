@@ -29,27 +29,27 @@ def conv(in_channels, out_channels, kernel_size, bias=False, padding = 1, stride
 class SKFF(nn.Module):
     def __init__(self, in_channels, height=3,reduction=8,bias=False):
         super(SKFF, self).__init__()
-        
+
         self.height = height
         d = max(int(in_channels/reduction),4)
-        
+
         self.avg_pool = nn.AdaptiveAvgPool2d(1)
         self.conv_du = nn.Sequential(nn.Conv2d(in_channels, d, 1, padding=0, bias=bias), nn.PReLU())
 
         self.fcs = nn.ModuleList([])
         for i in range(self.height):
             self.fcs.append(nn.Conv2d(d, in_channels, kernel_size=1, stride=1,bias=bias))
-        
+
         self.softmax = nn.Softmax(dim=1)
 
     def forward(self, inp_feats):
         batch_size = inp_feats[0].shape[0]
         n_feats =  inp_feats[0].shape[1]
-        
+
 
         inp_feats = torch.cat(inp_feats, dim=1)
         inp_feats = inp_feats.view(batch_size, self.height, n_feats, inp_feats.shape[2], inp_feats.shape[3])
-        
+
         feats_U = torch.sum(inp_feats, dim=1)
         feats_S = self.avg_pool(feats_U)
         feats_Z = self.conv_du(feats_S)
@@ -59,10 +59,10 @@ class SKFF(nn.Module):
         attention_vectors = attention_vectors.view(batch_size, self.height, n_feats, 1, 1)
         # stx()
         attention_vectors = self.softmax(attention_vectors)
-        
+
         feats_V = torch.sum(inp_feats*attention_vectors, dim=1)
-        
-        return feats_V        
+
+        return feats_V
 
 
 ##########################################################################
@@ -85,7 +85,10 @@ class BasicConv(nn.Module):
 
 class ChannelPool(nn.Module):
     def forward(self, x):
-        return torch.cat( (torch.max(x,1)[0].unsqueeze(1), torch.mean(x,1).unsqueeze(1)), dim=1 )
+        return torch.cat(
+            (torch.max(x, dim=1, keepdim=True)[0], torch.mean(x, dim=1, keepdim=True)),
+            dim=1,
+        )
 
 class spatial_attn_layer(nn.Module):
     def __init__(self, kernel_size=5):
@@ -130,11 +133,11 @@ class DAU(nn.Module):
         super(DAU, self).__init__()
         modules_body = [conv(n_feat, n_feat, kernel_size, bias=bias), act, conv(n_feat, n_feat, kernel_size, bias=bias)]
         self.body = nn.Sequential(*modules_body)
-        
+
         ## Spatial Attention
         self.SA = spatial_attn_layer()
 
-        ## Channel Attention        
+        ## Channel Attention
         self.CA = ca_layer(n_feat,reduction, bias=bias)
 
         self.conv1x1 = nn.Conv2d(n_feat*2, n_feat, kernel_size=1, bias=bias)
@@ -150,7 +153,7 @@ class DAU(nn.Module):
 
 
 ##########################################################################
-##---------- Resizing Modules ----------    
+##---------- Resizing Modules ----------
 class ResidualDownSample(nn.Module):
     def __init__(self, in_channels, bias=False):
         super(ResidualDownSample, self).__init__()
@@ -180,7 +183,7 @@ class DownSample(nn.Module):
         for i in range(self.scale_factor):
             modules_body.append(ResidualDownSample(in_channels))
             in_channels = int(in_channels * stride)
-        
+
         self.body = nn.Sequential(*modules_body)
 
     def forward(self, x):
@@ -215,7 +218,7 @@ class UpSample(nn.Module):
         for i in range(self.scale_factor):
             modules_body.append(ResidualUpSample(in_channels))
             in_channels = int(in_channels // stride)
-        
+
         self.body = nn.Sequential(*modules_body)
 
     def forward(self, x):
@@ -253,14 +256,14 @@ class MSRB(nn.Module):
         i=0
         FEATS.reverse()
         for feat in FEATS:
-            for scale in SCALE[i:]:                
+            for scale in SCALE[i:]:
                 self.up.update({f'{feat}_{scale}': UpSample(feat,scale,stride)})
             i+=1
 
         self.conv_out = nn.Conv2d(n_feat, n_feat, kernel_size=3, padding=1, bias=bias)
 
         self.selective_kernel = nn.ModuleList([SKFF(n_feat*stride**i, height) for i in range(height)])
-        
+
 
 
     def forward(self, x):
@@ -285,7 +288,7 @@ class MSRB(nn.Module):
                     TENSOR = []
                     nfeats = (2**j)*self.n_feat
                     for k in range(self.height):
-                        TENSOR.append(self.select_up_down(blocks_out[k], j, k)) 
+                        TENSOR.append(self.select_up_down(blocks_out[k], j, k))
 
                     selective_kernel_fusion = self.selective_kernel[j](TENSOR)
                     tmp.append(selective_kernel_fusion)
@@ -299,7 +302,7 @@ class MSRB(nn.Module):
         #Sum after grid
         out=[]
         for k in range(self.height):
-            out.append(self.select_last_up(blocks_out[k], k))  
+            out.append(self.select_last_up(blocks_out[k], k))
 
         out = self.selective_kernel[0](out)
 
