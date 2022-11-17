@@ -85,7 +85,7 @@ CUDA_VISIBLE_DEVICES=X python src/test_PSNR.py \
   <tr>
     <td>Google drive</td>
     <td> <a href="https://drive.google.com/drive/folders/1i_tW1axmOjOy1InX1o3iS1nLnJ8TND7f?usp=sharing">Google drive</a></td>
-    <td> <a href="https://drive.google.com/file/d/1lE6FyHS1MHoV6iM_s7phgf3Z3XJeC9E/view?usp=sharing">Google drive</a> </td>
+    <td> <a href="https://drive.google.com/file/d/1lE6FyHS-1MHoV6iM_s7phgf3Z3XJeC9E/view?usp=share_link">Google drive</a> </td>
     <td> <a href="https://drive.google.com/file/d/1OOyeu2pDM_OuE84qbV3eBy4pfP4xorVq/view?usp=sharing">Google drive</a> </td>
     <td> <a href="https://drive.google.com/file/d/1qPYGkCfVgn1Ami7ksf0DmKeKsoHVnm8i/view?usp=sharing">Google drive</a> </td>
     <td> <a href="https://drive.google.com/file/d/1IyZPih5BXB9ffgKneXf_FVpLus6Egmfn/view?usp=sharing">Google drive</a></td>
