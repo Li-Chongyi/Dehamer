@@ -213,6 +213,9 @@ CUDA_VISIBLE_DEVICES=1 python src/test_PSNR.py \
   --dataset-name NH   
 ```
 
+## Mindspore Verion
+
+We also provide the mindspore code at https://github.com/Dragoniss/mindspore-phase2-Dehamer.
 
 ## Results
 ### Quantitative comparisons on synthetic dehazing datasets: SOTS-Indoor and SOTS-Outdoor.
