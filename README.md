@@ -213,7 +213,7 @@ CUDA_VISIBLE_DEVICES=1 python src/test_PSNR.py \
   --dataset-name NH   
 ```
 
-## Mndspore Version
+## Mindspore Version
 
 We also provide the mindspore code at https://github.com/Dragoniss/mindspore-phase2-Dehamer.
 
